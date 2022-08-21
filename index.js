@@ -7,6 +7,56 @@
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
+const dog = {
+   species: 'dog',
+   name: 'Bob',
+   gender: "male",
+   legs: 4,
+   hands: 0,
+   say: "bark"
+};
+
+const cat = {
+   species: 'cat',
+   name: 'Kitty',
+   gender: "female",
+   legs: 4,
+   hands: 0,
+   say: "meow"
+};
+
+const man = {
+   species: 'human',
+   name: 'John',
+   gender: "male",
+   legs: 2,
+   hands: 2,
+   say: "Hello Jenny!"
+};
+
+const woman = {
+   species: 'human',
+   name: 'Jenny',
+   gender: "female",
+   legs: 2,
+   hands: 2,
+   say: "Hi John!"
+};
+
+const catWoman = Object.create(cat);
+catWoman.species = "cat-woman";
+catWoman.name = "Jini";
+catWoman.legs = 2;
+catWoman.hands = 2;
+
+const persons = [dog, cat, man, woman, catWoman];
+const properties = ['species', 'name', 'gender', 'legs', 'hands', 'say']
+
+function createString(persons, properties) {
+   return persons.map((person) =>
+      properties.map((property) => person[property] || 'none').join('; ')
+   ).join('\n');
+}
 
 
 // ======== OUTPUT ========
@@ -29,3 +79,4 @@
    */
 
 
+print(createString(persons, properties));
