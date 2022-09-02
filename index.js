@@ -7,57 +7,43 @@
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
-const dog = {
-   species: 'dog',
-   name: 'Bob',
-   gender: "male",
-   legs: 4,
-   hands: 0,
-   say: "bark"
-};
-
-const cat = {
-   species: 'cat',
-   name: 'Kitty',
-   gender: "female",
-   legs: 4,
-   hands: 0,
-   say: "meow"
-};
-
-const man = {
-   species: 'human',
-   name: 'John',
-   gender: "male",
-   legs: 2,
-   hands: 2,
-   say: "Hello Jenny!"
-};
-
-const woman = {
-   species: 'human',
-   name: 'Jenny',
-   gender: "female",
-   legs: 2,
-   hands: 2,
-   say: "Hi John!"
-};
-
-const catWoman = Object.create(cat);
-catWoman.species = "cat-woman";
-catWoman.name = "Jini";
-catWoman.legs = 2;
-catWoman.hands = 2;
-
-const persons = [dog, cat, man, woman, catWoman];
-const properties = ['species', 'name', 'gender', 'legs', 'hands', 'say']
-
-function createString(persons, properties) {
-   return persons.map((person) =>
-      properties.map((property) => person[property] || 'none').join('; ')
-   ).join('\n');
+class Inhabitants {
+   constructor(species, name, gender, say) {
+      this.species = species;
+      this.name = name;
+      this.gender = gender;
+      this.say = say;
+   }
+   createInhabitantsString() {
+      return Object.values(this).join('; ');
+   }
 }
 
+class Human extends Inhabitants {
+   constructor(species, name, gender, say, legs, hands) {
+      super(species, name, gender, say);
+      this.legs = legs;
+      this.hands = hands;
+   }
+}
+
+class Animal extends Inhabitants {
+   constructor(species, name, gender, say, paws) {
+      super(species, name, gender, say);
+      this.paws = paws;
+
+   }
+}
+
+const dog = new Animal('dog', 'Bob', "male", "bark", 4);
+const cat = new Animal('cat', 'Kitty', "female", "meow", 4);
+
+const man = new Human('human', 'John', "male", "Hello Jenny!", 2, 2);
+const woman = new Human('human', 'Jenny', "female", "Hi John!", 2, 2);
+
+const catWoman = new Human('human', 'Jenny', "female", cat.say, 2, 2);
+
+const persons = [dog, cat, man, woman, catWoman];
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -79,4 +65,4 @@ function createString(persons, properties) {
    */
 
 
-print(createString(persons, properties));
+print(persons.map((person) => person.createInhabitantsString()).join('\n'));
